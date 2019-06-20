@@ -1,0 +1,140 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "",
+  "projects": {
+    "nx-workspace-eight": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/workspace:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/nx-workspace-eight",
+      "sourceRoot": "apps/nx-workspace-eight/src",
+      "prefix": "nx-workspace-eight",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/nx-workspace-eight",
+            "index": "apps/nx-workspace-eight/src/index.html",
+            "main": "apps/nx-workspace-eight/src/main.ts",
+            "polyfills": "apps/nx-workspace-eight/src/polyfills.ts",
+            "tsConfig": "apps/nx-workspace-eight/tsconfig.app.json",
+            "assets": [
+              "apps/nx-workspace-eight/src/favicon.ico",
+              "apps/nx-workspace-eight/src/assets"
+            ],
+            "styles": ["apps/nx-workspace-eight/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/nx-workspace-eight/src/environments/environment.ts",
+                  "with": "apps/nx-workspace-eight/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "nx-workspace-eight:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "nx-workspace-eight:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "nx-workspace-eight:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/nx-workspace-eight/tsconfig.app.json",
+              "apps/nx-workspace-eight/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/nx-workspace-eight/jest.config.js",
+            "tsConfig": "apps/nx-workspace-eight/tsconfig.spec.json",
+            "setupFile": "apps/nx-workspace-eight/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "nx-workspace-eight-e2e": {
+      "root": "apps/nx-workspace-eight-e2e",
+      "sourceRoot": "apps/nx-workspace-eight-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/nx-workspace-eight-e2e/cypress.json",
+            "tsConfig": "apps/nx-workspace-eight-e2e/tsconfig.e2e.json",
+            "devServerTarget": "nx-workspace-eight:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "nx-workspace-eight:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/nx-workspace-eight-e2e/tsconfig.e2e.json"
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "warnings": {
+      "typescriptMismatch": false,
+      "versionMismatch": false
+    },
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "nx-workspace-eight"
+}

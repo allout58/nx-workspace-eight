@@ -1,0 +1,7 @@
+{
+  "extends": "../../tslint.json",
+  "rules": {
+    "directive-selector": [true, "attribute", "nxWorkspaceEight", "camelCase"],
+    "component-selector": [true, "element", "nx-workspace-eight", "kebab-case"]
+  }
+}
